@@ -3,6 +3,7 @@ import cors from "cors"
 import helmet from "helmet"
 import morgan from "morgan"
 import { isCelebrateError } from "celebrate"
+import apiRoutes from "./routes"
 
 const app = express()
 
@@ -12,9 +13,12 @@ app.use(helmet())
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
+//api routes
+apiRoutes(app)
+
 
 //production || route not found
-app.use("*", (req, res) => {
+app.get("*", (req, res) => {
  return res.status(404).json({
   status: false,
   message: "Route not found"
