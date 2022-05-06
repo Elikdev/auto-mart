@@ -1,6 +1,7 @@
 import { userService } from "../users/users.service"
 import {
   comparePassword,
+  createJwt,
   hashPassword,
   responseHandler,
 } from "../../../utils/helpers"
@@ -75,8 +76,9 @@ class AuthService {
     const { __v, password: passwordres, ...rest } = newObject
 
     //create access token
+    const token = createJwt({id: rest._id, name: rest.name}, "7d")
 
-    return responseHandler(true, "User login successfully", 200, rest)
+    return responseHandler(true, "User login successfully", 200, {...rest, token})
   }
 }
 
