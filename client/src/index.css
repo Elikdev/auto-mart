@@ -25,6 +25,18 @@ code {
   margin-left: -15px;
 }
 
+.auth-container {
+  background-image: url('./assets/cars--bg.jpg');
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+input {
+  outline: none;
+}
+
 .footer-container {
   background: linear-gradient(98.36deg, #13678A 0.32%, rgba(19, 103, 138, 0.41) 57.43%, rgba(19, 103, 138, 0.29) 98.05%)
 }
