@@ -1,15 +1,16 @@
-import { responseHandler } from "../../../utils/helpers";
-import Post from "./posts.model";
+import { responseHandler } from "../../../utils/helpers.js";
+import Post from "./posts.model.js";
 
 class PostService {
- async findAllPosts() {
-  const posts = await Post.find({}).populate("user", "name")
+ async findAllPosts(payload) {
 
-  if(posts.length <= 0) {
+  const {data} = payload
+
+  if(data?.length <= 0) {
    return responseHandler(false, "No cars for sale at the moment", 404)
   }
 
-  return responseHandler(true, "Posts retrieved", 200, posts)
+  return responseHandler(true, "Posts retrieved", 200, payload)
  }
 
  async findPostById(id) {

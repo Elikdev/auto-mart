@@ -1,11 +1,10 @@
-import { userService } from "../users/users.service"
+import { userService } from "../users/users.service.js"
 import {
   comparePassword,
   createJwt,
   hashPassword,
   responseHandler,
-} from "../../../utils/helpers"
-import { restart } from "nodemon"
+} from "../../../utils/helpers.js"
 
 class AuthService {
   async signUp(data) {

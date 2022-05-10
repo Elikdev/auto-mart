@@ -1,6 +1,6 @@
 import { Router } from "express"
-import { authService } from "./auth.service"
-import { authValidation } from "./auth.validation"
+import { authService } from "./auth.service.js"
+import { authValidation } from "./auth.validation.js"
 
 const authRouter = Router()
 

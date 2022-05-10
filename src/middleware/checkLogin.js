@@ -1,5 +1,5 @@
-import { verifyJwt } from "../utils/helpers";
-import { userService } from "../api/v1/users/users.service";
+import { verifyJwt } from "../utils/helpers.js";
+import { userService } from "../api/v1/users/users.service.js";
 
 export const checkToken = async (req, res, next) => {
   //check if token is present

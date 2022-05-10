@@ -1,6 +1,8 @@
-import { hashSync, compareSync } from "bcryptjs"
+import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
-import { SECRET_KEY } from "../config"
+import { SECRET_KEY } from "../config/index.js"
+
+const { hashSync, compareSync } = bcrypt
 
 export const responseHandler = (status, message, statusCode, data = {}) => {
   return {
