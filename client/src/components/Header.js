@@ -1,10 +1,19 @@
 import logo from "../assets/logo.png"
 import { useNavigate } from "react-router-dom"
+import {useSelector, useDispatch} from "react-redux"
+import { logout } from "../features/auth/authSlice"
 import { HiPlus } from "react-icons/hi"
 
 function Header() {
   const navigate = useNavigate()
-  const user = false
+  const dispatch = useDispatch()
+  const  { user } =  useSelector((state) => state.auth)
+
+  const handleLogout = () => {
+    dispatch(logout())
+    navigate("/")
+  }
+
   return (
     <div className="header-container px-[80px] border-3 border-red-400 py-[10px] shadow-lg">
       <div className="header flex justify-between items-center">
@@ -26,7 +35,7 @@ function Header() {
               <p className="text-[#13678A] text-sm font-semibold cursor-pointer mr-[30px]" onClick={() => navigate("/posts/user")}>
                 My posts
               </p>
-              <button className="border-2 border-[#13678A] text-xs rounded-[20px] px-[25px] py-[4px]">
+              <button className="border-2 border-[#13678A] text-xs rounded-[20px] px-[25px] py-[4px]" onClick={handleLogout}>
                 Logout
               </button>
             </>
