@@ -4,7 +4,7 @@ import { HiPlus } from "react-icons/hi"
 
 function Header() {
   const navigate = useNavigate()
-  const user = true
+  const user = false
   return (
     <div className="header-container px-[80px] border-3 border-red-400 py-[10px] shadow-lg">
       <div className="header flex justify-between items-center">

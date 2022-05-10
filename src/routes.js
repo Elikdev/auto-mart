@@ -1,5 +1,5 @@
-import authRouter from "./api/v1/auth/auth.controller"
-import postRouter from "./api/v1/posts/posts.controller";
+import authRouter from "./api/v1/auth/auth.controller.js"
+import postRouter from "./api/v1/posts/posts.controller.js";
 
 const globalPrefix = "/api/v1"
 

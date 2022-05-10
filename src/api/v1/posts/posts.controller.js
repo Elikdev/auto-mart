@@ -1,17 +1,20 @@
 import { Router } from "express";
-import { postService } from "./posts.service";
-import { checkToken } from "../../../middleware/checkLogin";
-import upload from "../../../utils/multer"
-import cloudinary from "../../../utils/cloudinary";
-import { postValidation } from "./posts.validation";
+import { postService } from "./posts.service.js";
+import { checkToken } from "../../../middleware/checkLogin.js";
+import upload from "../../../utils/multer.js"
+import cloudinary from "../../../utils/cloudinary.js";
+import { postValidation } from "./posts.validation.js";
+import paginator from "../../../middleware/Paginator.js";
+import Post from "./posts.model.js";
 
 const postRouter = Router()
 
 const imageUpload = upload.single("image")
 
-postRouter.get("/",  async (req, res) => {
+postRouter.get("/",  paginator(Post, "posts"), async (req, res) => {
  try {
-  const response = await postService.findAllPosts()
+   const paginate = res.payload
+  const response = await postService.findAllPosts(paginate)
 
   return res.status(response.statusCode).json({
    status: response.status,

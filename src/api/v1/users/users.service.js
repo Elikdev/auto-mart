@@ -1,4 +1,4 @@
-import User from "./users.model"
+import User from "./users.model.js"
 class UserService {
   async createNewUser(data) {
     const { name, email, mobile_number, password } = data

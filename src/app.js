@@ -3,7 +3,7 @@ import cors from "cors"
 import helmet from "helmet"
 import morgan from "morgan"
 import { isCelebrateError } from "celebrate"
-import apiRoutes from "./routes"
+import apiRoutes from "./routes.js"
 
 const app = express()
 

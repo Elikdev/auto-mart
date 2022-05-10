@@ -4,7 +4,7 @@ import logo from "../assets/logo.png"
 
 function Footer() {
   const navigate = useNavigate()
-  const user = true
+  const user = false
   return (
     <div className="footer-container h-[200px] px-[80px] pt-[50px]">
       <div className="footer-content flex justify-between items-start">

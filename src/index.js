@@ -1,8 +1,8 @@
-import app from './app';
-import dbConnect from './config/dbConnect';
-const { PORT } = require('./config/');
-const http = require('http');
-const log = require('debug')('log');
+import app from './app.js';
+import dbConnect from './config/dbConnect.js';
+import { PORT } from './config/index.js';
+import http from 'http';
+
 
 const startServer = () => {
   const server = http.createServer(app);
@@ -30,11 +30,11 @@ const startServer = () => {
     const bind = typeof address === 'string' ? `pipe ${address}` : `port: ${port}`;
     switch (error.code) {
       case 'EACCES':
-        log(`${bind} requires elevated privileges.`);
+        console.log(`${bind} requires elevated privileges.`);
         process.exit(1);
         break;
       case 'EADDRINUSE':
-        log(`${bind} is already in use.`);
+        console.log(`${bind} is already in use.`);
         process.exit(1);
         break;
       default:
@@ -46,7 +46,7 @@ const startServer = () => {
   server.on('listening', () => {
     const address = server.address();
     const bind = typeof address === 'string' ? `pipe ${address}` : `port ${port}`;
-    log(`Listening on ${bind}`);
+    console.log(`Listening on ${bind}`);
   });
 
   server.listen(port, () => {
@@ -54,7 +54,7 @@ const startServer = () => {
   });
 
   process.on('SIGINT', () => {
-    log('Bye bye!');
+    console.log('Bye bye!');
     process.exit();
   });
 };
@@ -64,6 +64,6 @@ try {
   dbConnect();
 } catch (error) {
   // handle errors here
-  log(error.message);
+  console.log(error.message);
   process.exit(-1);
 }
