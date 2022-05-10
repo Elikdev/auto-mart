@@ -3,7 +3,7 @@ import { MONGODB_URI } from "./index.js"
 
 const connectWithRetry = () => {
   console.log("MongoDB connection with retry")
-  return connect(MONGODB_URI, {
+  return mongoose.connect(MONGODB_URI, {
     keepAlive: 1,
     useNewUrlParser: true,
     useUnifiedTopology: true,

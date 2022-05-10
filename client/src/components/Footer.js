@@ -1,10 +1,11 @@
-import React from "react"
+import { useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
 import logo from "../assets/logo.png"
 
 function Footer() {
   const navigate = useNavigate()
-  const user = false
+  const { user } = useSelector((state) => state.auth)
+
   return (
     <div className="footer-container h-[200px] px-[80px] pt-[50px]">
       <div className="footer-content flex justify-between items-start">
