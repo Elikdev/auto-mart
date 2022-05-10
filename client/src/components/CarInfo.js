@@ -1,11 +1,14 @@
-import {HiLocationMarker, HiPhone, HiTag} from "react-icons/hi"
+import { useState } from "react"
+import {HiLocationMarker, HiPhone, HiTag, HiTrash} from "react-icons/hi"
 import target from "../assets/target.svg.svg"
+import notAvailable from "../assets/not-available.png"
 
-function CarInfo({car}) {
+function CarInfo({car, setShowModal, showModal, user}) {
   return (
-    <div className="car-section max-w-[33.3%]  p-[15px] rounded-[15px] shadow-2xl mr-[80px] mt-[40px] cursor-pointer">
-      <div className="car-image w-[300px] h-[200px]">
-        <img src={car} alt="" className="w-full h-full" />
+    <>
+    <div className="car-section max-w-[33.3%]  p-[15px] rounded-[15px] shadow-2xl mr-[80px] mt-[40px]">
+      <div className="car-image w-[300px] h-[200px] cursor-pointer" onClick={() => setShowModal(!showModal)}>
+        <img src={car ? car : notAvailable} alt="" className="w-full h-full" />
       </div>
       <hr className="border border-[#13678A] image-hr my-[12px]" />
       <div className="car-info">
@@ -28,7 +31,13 @@ function CarInfo({car}) {
           <p className="contact text-sm font-medium ml-[10px]">08165606432</p>
         </div>
       </div>
+      {user ? (
+        <div className="edit-delete mt-[20px]">
+          <button className="delete border-2 border-[#B8BCBD] p-[4px] shadow-xl rounded-md"><HiTrash className="text-[#13678A] text-lg"/></button>
+        </div>
+      ) : null}
     </div>
+    </>
   )
 }
 

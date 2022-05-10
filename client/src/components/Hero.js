@@ -1,7 +1,10 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import carImage from "../assets/car-image.png"
 
 function Hero() {
+  const navigate = useNavigate()
+  
   return (
     <div className="hero-container">
      <div className="hero-content flex justify-between pl-[80px]">
