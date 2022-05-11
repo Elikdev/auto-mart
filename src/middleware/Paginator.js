@@ -1,5 +1,10 @@
-const paginator = (model, item) => async(req, res, next) => {
+const paginator = (model, item, inc_query = "") => async(req, res, next) => {
  let query = model.find()
+
+ if(inc_query === "user:userId") {
+  query = model.find({user: req.user._id})
+ }
+
 
  const page = parseInt(req.query.page, 10) || 1
 
@@ -9,6 +14,12 @@ const paginator = (model, item) => async(req, res, next) => {
 
  const total = await model.countDocuments()
  query = query.skip(startIndex).limit(limit).sort({createdAt: -1})
+
+ if(item === "posts") {
+  query = query.populate("user", "name mobile_number")
+ }
+
+
 
  const results = await query;
 

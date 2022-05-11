@@ -1,4 +1,5 @@
 import React from "react"
+import { useSelector } from "react-redux"
 import {
   HiDocumentText,
   HiLocationMarker,
@@ -11,6 +12,7 @@ import car1 from "../../assets/car1.png"
 import notAvailable from "../../assets/not-available.png"
 
 function SinglePost({ showModal, setShowModal }) {
+  const { post } = useSelector((state) => state.post)
   return (
     <>
       {showModal && (
@@ -23,15 +25,19 @@ function SinglePost({ showModal, setShowModal }) {
       <div
         className={`single-post-container ${
           !showModal ? "hidden" : ""
-        } absolute top-[20%] flex justify-center items-center`}
+        } absolute top-[20%] flex justify-center items-center min-w-full`}
       >
-        <div className="single-post-content w-[50%] mx-auto bg-white shadow-2xl p-[20px] z-30 relative rounded-md">
+        <div className="single-post-content w-[40%] mx-auto bg-white shadow-2xl p-[20px] z-30 relative rounded-md">
           <HiX
             className=" cursor-pointer absolute right-0 top-0 mr-[10px] mt-[10px] text-[#13678A] font-bold text-lg"
             onClick={() => setShowModal(false)}
           />
           <div className="image-thumb w-[400px] h-[300px] mx-auto">
-            <img src={car1} alt="" className="w-full h-full" />
+            <img
+              src={post?.image_url ? post?.image_url : notAvailable}
+              alt=""
+              className="w-full h-full"
+            />
           </div>
 
           <div className="post-info mt-[30px]">
@@ -45,7 +51,7 @@ function SinglePost({ showModal, setShowModal }) {
                 </p>
               </div>
               <p className="name ml-[24px] text-sm text-[#2F3233]">
-                Toyota Camry 2022
+                {post?.name}
               </p>
             </div>
 
@@ -56,7 +62,9 @@ function SinglePost({ showModal, setShowModal }) {
                   Location
                 </p>
               </div>
-              <p className="location ml-[24px] text-[#2F3233]">Lagos Nigeria</p>
+              <p className="location ml-[24px] text-[#2F3233]">
+                {post?.location}
+              </p>
             </div>
 
             <div className="icon-price mb-[25px]">
@@ -64,7 +72,9 @@ function SinglePost({ showModal, setShowModal }) {
                 <HiTag className="text-[#13678A] text-[14px]" />
                 <p className="label-text ml-[10px] text-lg font-bold">Price</p>
               </div>
-              <p className="price ml-[24px] text-sm text-[#2F3233]">2000000</p>
+              <p className="price ml-[24px] text-sm text-[#2F3233]">
+                {post?.price}
+              </p>
             </div>
 
             <div className="icon-phone mb-[25px] ">
@@ -75,7 +85,7 @@ function SinglePost({ showModal, setShowModal }) {
                 </p>
               </div>
               <p className="phone ml-[24px] text-sm text-[#2F3233]">
-                08145678954
+                {post?.user?.mobile_number}
               </p>
             </div>
 
@@ -88,17 +98,7 @@ function SinglePost({ showModal, setShowModal }) {
               </div>
 
               <p className="description ml-[24px] text-sm text-[#2F3233]">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime,
-                ipsum ratione nisi eligendi quia quidem beatae corrupti iste
-                consectetur neque molestias labore hic velit expedita quam modi
-                itaque nostrum quos suscipit veritatis, laudantium minus dicta.
-                Aspernatur, non ad perferendis repellendus aut error impedit
-                inventore dolore consectetur aliquam culpa at labore amet
-                sapiente odio reprehenderit commodi molestiae laborum dolorum,
-                sed fuga iste nesciunt. Ipsum, id? Enim odit minima, suscipit
-                quam, libero rerum aut eos assumenda saepe nesciunt totam
-                molestiae facere obcaecati vitae impedit dolore cum illum
-                perferendis maxime laborum explicabo commodi doloremque.
+                {post?.description}
               </p>
             </div>
           </div>
