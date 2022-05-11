@@ -1,9 +1,9 @@
-import { connect } from "mongoose"
-import { MONGODB_URI } from "./"
+import mongoose from "mongoose"
+import { MONGODB_URI } from "./index.js"
 
 const connectWithRetry = () => {
   console.log("MongoDB connection with retry")
-  return connect(MONGODB_URI, {
+  return mongoose.connect(MONGODB_URI, {
     keepAlive: 1,
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -12,7 +12,7 @@ const connectWithRetry = () => {
 
 const dbConnect = async () => {
   try {
-    await connect(MONGODB_URI, {
+    await mongoose.connect(MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
