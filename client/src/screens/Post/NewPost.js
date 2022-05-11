@@ -66,10 +66,10 @@ function NewPost() {
   }
 
   return (
-    <div className="register-container post-new-container relative">
+    <div className="register-container post-new-container ">
       <div className="full-bg absolute w-full h-full bg-[#c2ced4] opacity-[0.85]"></div>
       <div className="flex items-center justify-center h-full py-[80px]">
-        <div className="form-container bg-white w-[30%] z-10 p-[15px] shadow-2xl rounded-xl">
+        <div className="form-container bg-white w-[80%] sm:w-[70%] lg:w-[30%] z-50 p-[15px] shadow-2xl rounded-xl">
           <div className="form-header flex items-center">
             <div className="image-thumb w-[40px] h-[40px] mr-[15px] mb-[20px]">
               <img src={logo} alt="" className="w-full h-full" />

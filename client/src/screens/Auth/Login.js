@@ -55,7 +55,7 @@ function Login() {
     <div className="login-container auth-container relative">
       <div className="full-bg absolute w-full h-full bg-[#13678A] opacity-[0.85]"></div>
       <div className="flex items-center justify-center h-full">
-        <div className="form-container bg-white w-[30%] z-10 p-[15px] shadow-2xl rounded-xl">
+        <div className="form-container bg-white w-[80%] sm:w-[70%] lg:w-[30%] z-10 p-[15px] shadow-2xl rounded-xl">
           <div className="form-header flex items-center">
             <div className="image-thumb w-[40px] h-[40px] mr-[15px] mb-[20px]">
               <img src={logo} alt="" className="w-full h-full" />

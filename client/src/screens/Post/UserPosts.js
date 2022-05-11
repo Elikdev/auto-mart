@@ -1,14 +1,49 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import Pagination from "../../components/Pagination"
 import CarInfo from "../../components/CarInfo"
 import SinglePost from "./SinglePost"
-import car1 from "../../assets/car1.png"
+import { fetchUserPosts } from "../../features/posts/postSlice"
 
 function UserPosts() {
  const [showModal, setShowModal] = useState(false)
+ const [currentPage, setCurrentPage] = useState(1)
+ const [lastPage, setLastPage] = useState(null)
+ const [postsPerPage] = useState(12)
+ const dispatch = useDispatch()
 
  const {user_posts:posts, user_posts_loading: loading, user_posts_error: error } = useSelector((state) => state.post)
+
+ const paginateBack = () =>
+ setCurrentPage(currentPage <= 1 ? 1 : Number(currentPage) - 1)
+
+const paginateFront = () =>
+ setCurrentPage(currentPage >= lastPage ? 1 : Number(currentPage) + 1)
+
+const paginateLast = () => setCurrentPage(Number(lastPage))
+
+const paginateFirst = () => setCurrentPage(1)
+
+useEffect(() => {
+ dispatch(fetchUserPosts({ limit: postsPerPage, page: currentPage }))
+}, [dispatch, currentPage])
+
+useEffect(() => {
+ if (posts?.pagination) {
+   let curr_page = posts?.pagination?.links?.current
+     ?.split("?")[1]
+     ?.split("=")[1]
+     .split("&")[0]
+   setCurrentPage(curr_page)
+   let last_page = posts?.pagination?.links?.last
+     ?.split("?")[1]
+     ?.split("=")[1]
+     .split("&")[0]
+   setLastPage(last_page)
+ }
+}, [posts?.pagination])
+
+
   return (
    <>
     <div className="all-posts-container pl-[80px]">
@@ -28,18 +63,18 @@ function UserPosts() {
           </>
         )
       }
-       {/* <CarInfo car={car1} showModal={showModal} setShowModal={setShowModal} user={true} />
-       <CarInfo showModal={showModal} setShowModal={setShowModal} user={true} />
-       <CarInfo car={car1} showModal={showModal} setShowModal={setShowModal} user={true} />
-       <CarInfo car={car1} showModal={showModal} setShowModal={setShowModal} user={true} />
-       <CarInfo car={car1} showModal={showModal} setShowModal={setShowModal} user={true} />
-       <CarInfo car={car1} showModal={showModal} setShowModal={setShowModal} user={true} />
-       <CarInfo showModal={showModal} setShowModal={setShowModal} user={true} />
-       <CarInfo car={car1} showModal={showModal} setShowModal={setShowModal} user={true} />
-       <CarInfo showModal={showModal} setShowModal={setShowModal} user={true} />
-       <CarInfo car={car1} showModal={showModal} setShowModal={setShowModal} user={true} /> */}
       </div>
-      <Pagination />
+      {posts?.data?.length > 12 && (
+            <Pagination
+              postsPerPage={postsPerPage}
+              paginateBack={paginateBack}
+              paginateFront={paginateFront}
+              paginateFirst={paginateFirst}
+              paginateLast={paginateLast}
+              currentPage={currentPage}
+              totalPosts={30}
+            />
+          )}
      </div>
     </div>
     <SinglePost showModal={showModal} setShowModal={setShowModal} />

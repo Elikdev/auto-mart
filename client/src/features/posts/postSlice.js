@@ -33,9 +33,10 @@ export const addNewPost = createAsyncThunk(
 
 export const fetchAllPosts = createAsyncThunk(
   "post/fetchAllPosts",
-  async (_, thunkAPI) => {
+  async (data, thunkAPI) => {
+    const {limit, page} = data
     try {
-      const response = await axios.get(`${BASE_URL}/posts`)
+      const response = await axios.get(`${BASE_URL}/posts?limit=${limit}&page=${page}`)
       return response.data
     } catch (error) {
       const message = error
@@ -55,7 +56,8 @@ export const fetchAllPosts = createAsyncThunk(
 
 export const fetchUserPosts = createAsyncThunk(
   "post/fetchUserPosts",
-  async (_, thunkAPI) => {
+  async (data, thunkAPI) => {
+    const {limit, page} = data
     const config = {
       headers: {
         Authorization: `Bearer ${thunkAPI.getState().auth.user.token}`,
@@ -63,7 +65,7 @@ export const fetchUserPosts = createAsyncThunk(
     }
 
     try {
-      const response = await axios.get(`${BASE_URL}/posts/user/all-posts`, config)
+      const response = await axios.get(`${BASE_URL}/posts/user/all-posts?limit=${limit}&page=${page}`, config)
       return response.data
     } catch (error) {
       const message = error
