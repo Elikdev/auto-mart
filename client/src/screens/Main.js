@@ -9,8 +9,8 @@ function Main() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(fetchAllPosts())
-    dispatch(fetchUserPosts())
+    dispatch(fetchAllPosts({limit: 12, page: 1}))
+    dispatch(fetchUserPosts({limit: 12, page: 1}))
   }, [])
 
   return (

@@ -7,7 +7,7 @@ function Footer() {
   const { user } = useSelector((state) => state.auth)
 
   return (
-    <div className="footer-container h-[200px] px-[80px] pt-[50px]">
+    <div className="footer-container h-[200px] px-[40px] lg:px-[80px] pt-[50px]">
       <div className="footer-content flex justify-between items-start">
         <div className="logo-name">
           <div
