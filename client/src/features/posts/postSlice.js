@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
 
-const BASE_URL = process.env.REACT_APP_API_BASE_URL
+const BASE_URL = "api/v1"
 
 export const addNewPost = createAsyncThunk(
   "post/addNewPost",
