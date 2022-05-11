@@ -18,11 +18,11 @@ function CarsForSale() {
   const {posts, loading} = useSelector((state) => state.post)
   return (
     <>
-    <div className="car-section-container pl-[80px] pr-[0px] mb-[40px]">
-     <h1 className="font-bold text-lg">Cars for sale</h1>
+    <div className="car-section-container pl-[40px] lg:pl-[80px] pr-[0px] mb-[40px]">
+     <h1 className="font-bold text-lg mb-[-25px]">Cars for sale</h1>
      <div className="car-section-content flex flex-wrap mb-[30px]">
      {
-        posts?.data?.data?.length > 0 ? posts?.data?.data.map((post) => {
+        posts?.data?.data?.length > 0 ? posts?.data?.data.slice(0, 6).map((post) => {
           return (
             <CarInfo key={post?._id} post={post} showModal={showModal} setShowModal={setShowModal} />
           )

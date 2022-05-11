@@ -6,8 +6,12 @@ import { isCelebrateError } from "celebrate"
 import apiRoutes from "./routes.js"
 import { NODE_ENV } from "./config/index.js"
 import path from "path"
+import url from 'url';
 
 const app = express()
+const { fileURLToPath } = url
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.use(morgan("dev"))
 app.use(cors())
@@ -21,19 +25,21 @@ apiRoutes(app)
 
 //production || route not found
 if(NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, 'client/build')))
+  app.use(express.static('client/build'))
 
   app.get("*", function(req, res) {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'))
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
   })
+} else {
+  app.get("*", (req, res) => {
+    return res.status(404).json({
+     status: false,
+     message: "Route not found"
+    })
+   })
 }
 
-app.get("*", (req, res) => {
- return res.status(404).json({
-  status: false,
-  message: "Route not found"
- })
-})
+
 
 app.use((error, req, res, next) => {
  if (isCelebrateError(error)) {
