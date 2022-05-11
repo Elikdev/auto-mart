@@ -14,7 +14,7 @@ class PostService {
  }
 
  async findPostById(id) {
-  const post = await Post.findById(id).populate("user", "name")
+  const post = await Post.findById(id).populate("user", "name mobile_number")
 
   if(!post) {
    return responseHandler(false, "Post was not found", 404)
@@ -23,8 +23,18 @@ class PostService {
   return responseHandler(true, "Post retrieved successfully", 200, post)
  }
 
+ async findPostByUser(payload) {
+  const {data} = payload
+
+  if(data?.length <= 0) {
+   return responseHandler(false, "You have not posted any cars", 404)
+  }
+
+  return responseHandler(true, "Post retrieved successfully", 200, payload)
+ }
+
  async createNewPost(data) {
-  const {name, price, location, image_url, description, userId} = data
+  const {name, price, location, image_url, description, user} = data
 
   const instance = new Post({
    name,
@@ -32,7 +42,7 @@ class PostService {
    location, 
    image_url,
    description,
-   user: userId
+   user: user._id
   })
 
   const new_post = await instance.save()
@@ -41,7 +51,11 @@ class PostService {
    return responseHandler(false, "Post could not be saved due to an error", 400)
   }
 
-  return responseHandler(true, "New post created successfully", 201, new_post)
+  const newObject = JSON.parse(JSON.stringify(new_post))
+
+  const {user: res_user, ...rest} = newObject
+
+  return responseHandler(true, "New post created successfully", 201, {...rest, user: user})
  }
 
  async deletePost(id, userId) {

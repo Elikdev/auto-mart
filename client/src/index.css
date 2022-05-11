@@ -50,5 +50,5 @@ input {
 }
 
 .bg-overlay {
-  height: calc(100vh + 150%);
+  height: calc(100vh + 100% - 42px);
 }
