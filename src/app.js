@@ -4,6 +4,8 @@ import helmet from "helmet"
 import morgan from "morgan"
 import { isCelebrateError } from "celebrate"
 import apiRoutes from "./routes.js"
+import { NODE_ENV } from "./config/index.js"
+import path from "path"
 
 const app = express()
 
@@ -18,6 +20,14 @@ apiRoutes(app)
 
 
 //production || route not found
+if(NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'client/build')))
+
+  app.get("*", function(req, res) {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'))
+  })
+}
+
 app.get("*", (req, res) => {
  return res.status(404).json({
   status: false,
