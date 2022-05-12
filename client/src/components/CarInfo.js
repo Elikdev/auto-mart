@@ -33,10 +33,10 @@ function CarInfo({ setShowModal, showModal, user, post }) {
   }, [isDeleted, error, navigate, dispatch])
 
   return (
-    <div className="md:w-[40%] lg:w-[25%]">
+    <div className="w-full md:w-[40%] lg:w-[25%]">
       <div className="car-section p-[15px] rounded-[15px] shadow-2xl mr-[40px] mt-[40px]">
         <div
-          className="car-image w-[full] h-[full] cursor-pointer"
+          className="car-image w-full h-full cursor-pointer"
           onClick={() => {
             dispatch(getSinglePost(post?._id))
             setShowModal(!showModal)
@@ -45,7 +45,7 @@ function CarInfo({ setShowModal, showModal, user, post }) {
           <img
             src={post?.image_url ? post?.image_url : notAvailable}
             alt=""
-            className="w-full h-full"
+            className="w-full h-[200px]"
           />
         </div>
         <hr className="border border-[#13678A] image-hr my-[12px]" />
