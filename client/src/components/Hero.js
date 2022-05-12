@@ -18,7 +18,7 @@ function Hero() {
     <div className="hero-container mb-[100px] lg:mb-[50px]">
      <div className="hero-content lg:flex lg:justify-between lg:pl-[80px] lg:pr-0 pr-[40px] pl-[40px]">
       <aside className="hero-text max-w-full lg:max-w-[480px] mt-[40px] lg:mt-[85px]">
-       <h1 className='text-[35px] font-bold leading-[45px]'>Welcome to the online marketplace where you can find the buyer of your car.</h1>
+       <h1 className='text-[35px] font-bold leading-[45px]'>Welcome to the online marketplace where you can find the right buyer for your car.</h1>
        <p className="hero-subtext text-xs text-[#E8E5E5]  lg:text-[#2F3233]  mt-[15px] w-full lg:w-[360px]">
        An online marketplace for automobiles. 
        A platform to select any vehicle of your choice and also a nice place to sell your cars. 
