@@ -22,7 +22,7 @@ app.use(
       "img-src": ["'self'", "https: data:"]
     }
   })
-)
+) // for loading images from cloudinary
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
